@@ -1,2 +1,2 @@
-# Taller1_Proces_Ima_Video
-Solución Taller 1 _ Procesamiento de Imágenes y video
+# Taller_Proces_Ima_Video
+Solución Taller_ Procesamiento de Imágenes y video
