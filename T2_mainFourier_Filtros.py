@@ -13,8 +13,6 @@ import sys
     python fft_filtering.py <path_to_image> <image_name>
 """
 
-## Falta definir la clase, el constructor y el metodo de set
-
 class thetaFilter:
 
     def __init__(self, img):
@@ -46,7 +44,7 @@ class thetaFilter:
         # orientation-based filter mask
         orientation_mask = np.zeros_like(image_gray)
 
-        # Verficamos la oreintación del píxel
+        # Verficamos la orientación del píxel
         orientation = 180 * np.arctan2(row_iter - half_size, col_iter - half_size) / np.pi + 180
         idx_orientation_larger = orientation < self.tetha + self.D_theta
         idx_orientation_lesser = orientation > self.tetha - self.D_theta
