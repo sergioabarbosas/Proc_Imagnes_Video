@@ -13,6 +13,8 @@ import sys
     python fft_filtering.py <path_to_image> <image_name>
 """
 
+## Falta definir la clase, el constructor y el metodo de set
+
 class thetaFilter:
 
     def __init__(self, img):
@@ -44,7 +46,7 @@ class thetaFilter:
         # orientation-based filter mask
         orientation_mask = np.zeros_like(image_gray)
 
-        # Verficamos la orientación del píxel
+        # Verficamos la oreintación del píxel
         orientation = 180 * np.arctan2(row_iter - half_size, col_iter - half_size) / np.pi + 180
         idx_orientation_larger = orientation < self.tetha + self.D_theta
         idx_orientation_lesser = orientation > self.tetha - self.D_theta
@@ -82,23 +84,27 @@ def std_N (image, N, thresh):
 
 if __name__ == '__main__':
 
-    img = cv2.imread("01_1.tif")
+    path = sys.argv[1]
+    image_name = sys.argv[2]
+    path_file = os.path.join(path, image_name)
+
+    img = cv2.imread(path_file)
     filtrada0 = thetaFilter(img)
     filtrada0.set_theta(0, 20)
     img_0 = filtrada0.filtering()[0]
 
-    img_45 = cv2.imread("01_1.tif")
+    img_45 = cv2.imread(path_file)
     filtrada45 = thetaFilter(img_45)
     filtrada45.set_theta(45, 20)
     img_45 = filtrada45.filtering()[0]
     mask_45= filtrada45.filtering()[1]
 
-    img_90 = cv2.imread("01_1.tif")
+    img_90 = cv2.imread(path_file)
     filtrada90 = thetaFilter(img_90)
     filtrada90.set_theta(90, 20)
     img_90 = filtrada90.filtering()[0]
 
-    img_135 = cv2.imread("01_1.tif")
+    img_135 = cv2.imread(path_file)
     filtrada135 = thetaFilter(img_135)
     filtrada135.set_theta(135, 20)
     img_135 = filtrada135.filtering()[0]
@@ -128,6 +134,7 @@ if __name__ == '__main__':
 
     #cv2.imshow("45° Std image", 255 * (mask_std_45.astype(np.uint8)))
     cv2.imshow("0 Orientation Filtered image", img_0)
+    cv2.imshow("Filter frequency response", 255 * mask_45)
     cv2.imshow("45 Orientation Filtered image", img_45)
     cv2.imshow("90 Orientation Filtered image", img_90)
     cv2.imshow("135 Orientation Filtered image", img_135)
